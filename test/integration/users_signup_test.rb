@@ -4,6 +4,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   test "invalid signup information" do
     get signup_path
+    # usersテーブルの数が処理の前後で異なるかどうかを検証
     assert_no_difference 'User.count' do
       post signup_path, params: { user: { name:  "",
                                          email: "user@invalid",
@@ -15,4 +16,20 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div.field_with_errors'
     assert_select 'form[action="/signup"]'
   end
+
+  test "valid signup information" do
+    get signup_path
+    assert_difference 'User.count', 1 do
+      post users_path, params: { user: { name:  "Example User",
+                                         email: "user@example.com",
+                                         password:              "password",
+                                         password_confirmation: "password" } }
+    end
+    # POSTリクエストを送信した結果を見て、指定されたリダイレクト先に移動する
+    follow_redirect!
+    assert_template 'users/show'
+    # flashに対するテスト -> わからん
+    # assert_not flash.danger
+  end
+
 end
