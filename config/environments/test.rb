@@ -37,6 +37,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Test mailer
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: '192.168.33.10:3000' }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
