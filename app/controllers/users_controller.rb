@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+
   def show
     @user = User.find(params[:id])
-    # debugger
   end
 
   def new
@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
-      # redirect_to user_url(@user) // 以下は等価のコード
       redirect_to @user
     else
       render 'new'
