@@ -48,9 +48,8 @@ Rails.application.configure do
   # Show mail preview
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :test
-  host = '192.168.33.10:3000'
+  host = '192.168.33.10:3000' # ここをコピペすると失敗します。自分の環境に合わせてください。
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
